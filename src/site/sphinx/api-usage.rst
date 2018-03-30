@@ -25,7 +25,7 @@ The model
 ---------
 
 At the core of DdlUtils lies the database model in package
-``org.apache.ddlutils.model``. It consists of classes that
+``de.elnarion.ddlutils.model``. It consists of classes that
 represent the database schema:
 
 .. image:: images/model.png
@@ -43,8 +43,8 @@ Most of the time you have a schema in an XML file, and you want to
 read it into memory in order to do something with it. This is quite easily
 accomplished with a few lines of code::
 
-	import org.apache.ddlutils.io.DatabaseIO;
-	import org.apache.ddlutils.model.Database;
+	import de.elnarion.ddlutils.io.DatabaseIO;
+	import de.elnarion.ddlutils.model.Database;
 
 	...
 
@@ -58,8 +58,8 @@ Writing to XML
 
 Writing a model to XML is just as easy as reading from XML::
 
-	import org.apache.ddlutils.io.DatabaseIO;
-	import org.apache.ddlutils.model.Database;
+	import de.elnarion.ddlutils.io.DatabaseIO;
+	import de.elnarion.ddlutils.model.Database;
 
 	...
 
@@ -76,9 +76,9 @@ because we first need to create a platform instance via the data source pointing
 to the database::
 
 	import javax.sql.DataSource;
-	import org.apache.ddlutils.Platform;
-	import org.apache.ddlutils.PlatformFactory;
-	import org.apache.ddlutils.model.Database;
+	import de.elnarion.ddlutils.Platform;
+	import de.elnarion.ddlutils.PlatformFactory;
+	import de.elnarion.ddlutils.model.Database;
 
 	...
 
@@ -106,9 +106,9 @@ Both types of modification differ only in how the SQL is created, the general pr
 is the same: create the sql and execute it::
 
 	import javax.sql.DataSource;
-	import org.apache.ddlutils.Platform;
-	import org.apache.ddlutils.PlatformFactory;
-	import org.apache.ddlutils.model.Database;
+	import de.elnarion.ddlutils.Platform;
+	import de.elnarion.ddlutils.PlatformFactory;
+	import de.elnarion.ddlutils.model.Database;
 
 	...
 
@@ -143,9 +143,9 @@ are then created which can be inserted by DdlUtils into the database::
 
 	import javax.sql.DataSource;
 	import org.apache.commons.beanutils.DynaBean;
-	import org.apache.ddlutils.Platform;
-	import org.apache.ddlutils.PlatformFactory;
-	import org.apache.ddlutils.model.Database;
+	import de.elnarion.ddlutils.Platform;
+	import de.elnarion.ddlutils.PlatformFactory;
+	import de.elnarion.ddlutils.model.Database;
 
 	...
 
@@ -179,10 +179,10 @@ to stdout::
 	import java.util.Iterator;
 	import javax.sql.DataSource;
 	import org.apache.commons.beanutils.DynaBean;
-	import org.apache.ddlutils.Platform;
-	import org.apache.ddlutils.PlatformFactory;
-	import org.apache.ddlutils.model.Database;
-	import org.apache.ddlutils.model.Table;
+	import de.elnarion.ddlutils.Platform;
+	import de.elnarion.ddlutils.PlatformFactory;
+	import de.elnarion.ddlutils.model.Database;
+	import de.elnarion.ddlutils.model.Table;
 
 	...
 
@@ -230,10 +230,10 @@ on the safe side, then you could write the above statement like this::
 	import java.util.Iterator;
 	import javax.sql.DataSource;
 	import org.apache.commons.beanutils.DynaBean;
-	import org.apache.ddlutils.Platform;
-	import org.apache.ddlutils.PlatformFactory;
-	import org.apache.ddlutils.model.Database;
-	import org.apache.ddlutils.model.Table;
+	import de.elnarion.ddlutils.Platform;
+	import de.elnarion.ddlutils.PlatformFactory;
+	import de.elnarion.ddlutils.model.Database;
+	import de.elnarion.ddlutils.model.Table;
 
 	...
 

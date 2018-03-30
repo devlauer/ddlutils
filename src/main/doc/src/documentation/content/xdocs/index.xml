@@ -28,7 +28,7 @@
       <p>
         <strong>DdlUtils</strong> is a small, easy-to-use component for working with Database Definition
         (DDL) files. These are XML files that contain the definition of a database schema, e.g. tables
-        and columns. These files can be fed into DdlUtils via its Ant task or programmatically in order to
+        and columns. These files can be fed into DdlUtils programmatically in order to
         create the corresponding database or alter it so that it corresponds to the DDL. Likewise, DdlUtils
         can generate a DDL file for an existing database.
       </p>
@@ -90,13 +90,9 @@
     <section id="Learning_more">
       <title>Learning more</title>
       <p>
-        There are essentially two ways to use DdlUtils:
+        There are essentially one way to use DdlUtils:
       </p>
       <ul>
-        <li>
-          In an <a href="ext:ant">Ant</a> build script via the task provided by DdlUtils.
-          You can learn more about <a href="ext:ddlutils/antdoc/">here</a>.
-        </li>
         <li>
           From within your Java program, about which you can learn more 
           <a href="site:documentation/api-usage">here</a>.

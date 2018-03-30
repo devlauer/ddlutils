@@ -27,7 +27,7 @@
       <title>The model</title>
       <p>
         At the core of DdlUtils lies the database model in package
-        <code>org.apache.ddlutils.model</code>. It consists of classes that
+        <code>de.elnarion.ddlutils.model</code>. It consists of classes that
         represent the database schema:
       </p>
       <p>
@@ -48,8 +48,8 @@
         accomplished with a few lines of code:
       </p>
       <source><![CDATA[
-import org.apache.ddlutils.io.DatabaseIO;
-import org.apache.ddlutils.model.Database;
+import de.elnarion.ddlutils.io.DatabaseIO;
+import de.elnarion.ddlutils.model.Database;
 
 ...
 
@@ -64,8 +64,8 @@ public Database readDatabaseFromXML(String fileName)
         Writing a model to XML is just as easy as reading from XML:
       </p>
       <source><![CDATA[
-import org.apache.ddlutils.io.DatabaseIO;
-import org.apache.ddlutils.model.Database;
+import de.elnarion.ddlutils.io.DatabaseIO;
+import de.elnarion.ddlutils.model.Database;
 
 ...
 
@@ -83,9 +83,9 @@ public void writeDatabaseToXML(Database db, String fileName)
       </p>
       <source><![CDATA[
 import javax.sql.DataSource;
-import org.apache.ddlutils.Platform;
-import org.apache.ddlutils.PlatformFactory;
-import org.apache.ddlutils.model.Database;
+import de.elnarion.ddlutils.Platform;
+import de.elnarion.ddlutils.PlatformFactory;
+import de.elnarion.ddlutils.model.Database;
 
 ...
 
@@ -116,9 +116,9 @@ public Database readDatabase(DataSource dataSource)
       </p>
       <source><![CDATA[
 import javax.sql.DataSource;
-import org.apache.ddlutils.Platform;
-import org.apache.ddlutils.PlatformFactory;
-import org.apache.ddlutils.model.Database;
+import de.elnarion.ddlutils.Platform;
+import de.elnarion.ddlutils.PlatformFactory;
+import de.elnarion.ddlutils.model.Database;
 
 ...
 
@@ -156,9 +156,9 @@ public void changeDatabase(DataSource dataSource,
       <source><![CDATA[
 import javax.sql.DataSource;
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.ddlutils.Platform;
-import org.apache.ddlutils.PlatformFactory;
-import org.apache.ddlutils.model.Database;
+import de.elnarion.ddlutils.Platform;
+import de.elnarion.ddlutils.PlatformFactory;
+import de.elnarion.ddlutils.model.Database;
 
 ...
 
@@ -194,10 +194,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.sql.DataSource;
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.ddlutils.Platform;
-import org.apache.ddlutils.PlatformFactory;
-import org.apache.ddlutils.model.Database;
-import org.apache.ddlutils.model.Table;
+import de.elnarion.ddlutils.Platform;
+import de.elnarion.ddlutils.PlatformFactory;
+import de.elnarion.ddlutils.model.Database;
+import de.elnarion.ddlutils.model.Table;
 
 ...
 
@@ -248,10 +248,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.sql.DataSource;
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.ddlutils.Platform;
-import org.apache.ddlutils.PlatformFactory;
-import org.apache.ddlutils.model.Database;
-import org.apache.ddlutils.model.Table;
+import de.elnarion.ddlutils.Platform;
+import de.elnarion.ddlutils.PlatformFactory;
+import de.elnarion.ddlutils.model.Database;
+import de.elnarion.ddlutils.model.Table;
 
 ...
 

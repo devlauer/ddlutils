@@ -469,14 +469,6 @@ body #banner td a, .app h3 a, .app h4 a {
     web pages  
    -->
   <credits>
-      <credit box-location="alt">
-            <name>Ant</name>
-            <url>http://ant.apache.org/</url>
-            <image>images/ant.gif</image>
-            <width>80</width>
-            <height>30</height>
-        </credit>
-
         <credit box-location="alt">
             <name>JUnit</name>
             <url>http://www.junit.org/</url>

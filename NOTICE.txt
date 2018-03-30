@@ -1,6 +1,16 @@
 =========================================================================
 ==  NOTICE file corresponding to section 4(d) of the Apache License,   ==
-==  Version 2.0, in this case for the Apache DdlUtils distribution.    ==
+==  Version 2.0, in this case for the DdlUtils distribution.           ==
+=========================================================================
+
+This project is a fork of the Apache DdlUtils Project. Because the project 
+is retired a fork was made and all packages were renamed.
+
+=========================================================================
+
+This product source is derived from software developed by the 
+Apache DdlUtils project
+
 =========================================================================
 
 Apache DdlUtils

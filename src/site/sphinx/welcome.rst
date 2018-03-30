@@ -18,7 +18,6 @@
 .. _`Turbine XML format`: http://db.apache.org/torque/dtd/database.dtd
 .. _`Torque`: http://db.apache.org/torque/
 .. _`OJB`: http://db.apache.org/ojb/
-.. _`Ant`: http://ant.apache.org/
 
 .. _contents:
 
@@ -28,14 +27,12 @@ What is DdlUtils
 **DdlUtils** is a small, easy-to-use component for working with Database Definition
 (DDL) files. 
 
-As of Fall, 2016, the DdlUtils work is no longer active.
-
 The website, downloads, and issue tracker all remain open, though the
 issue tracker is read-only. The mailing lists have been closed down, but
 old mail can be browse in the mailing list archives.
 
 Database Definition (DDL) files are XML files that contain the definition of a database schema, e.g. tables
-and columns. These files can be fed into DdlUtils via its Ant task or programmatically in order to
+and columns. These files can be fed into DdlUtils programmatically in order to
 create the corresponding database or alter it so that it corresponds to the DDL. Likewise, DdlUtils
 can generate a DDL file for an existing database.
 
@@ -93,19 +90,6 @@ datatypes which are inherently database specific. An example of such a file is::
 Learning more
 -------------
 
-There are essentially two ways to use DdlUtils:
+There is essentially one way to use DdlUtils:
 
-* In an `Ant`_ build script via the task provided by DdlUtils. You can learn more about it in the 
-  :doc:`Ant task documentation <ant-tasks>`.
 * From within your Java program, about which you can learn more in the :doc:`API documentation <api-usage>`.
-
-You're also welcome to join one of the two DdlUtils' mailing lists:
-
-* User mailing list ``ddlutils-user <at> db.apache.org``
-
-  `Subscribe <mailto:ddlutils-user-subscribe@db.apache.org>`_, `Unsubscribe <mailto:ddlutils-user-unsubscribe@db.apache.org>`_, `Archive <http://mail-archives.apache.org/mod_mbox/db-ddlutils-user/>`_
-
-* Developer mailing list ``ddlutils-dev <at> db.apache.org``
-
-  `Subscribe <mailto:ddlutils-dev-subscribe@db.apache.org>`_, `Unsubscribe <mailto:ddlutils-dev-unsubscribe@db.apache.org>`_, `Archive <http://mail-archives.apache.org/mod_mbox/db-ddlutils-dev/>`_
-

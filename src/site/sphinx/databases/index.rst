@@ -21,16 +21,11 @@ Database details
 .. toctree::
    :maxdepth: 2
 
-   axion
    db2
    derby
-   firebird
    hsqldb
-   interbase
    maxdb
-   mckoi
    mysql
    oracle
    postgresql
    sqlserver
-   sybase
