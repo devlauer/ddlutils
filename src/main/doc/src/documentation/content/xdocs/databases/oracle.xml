@@ -38,7 +38,7 @@
       choose the v8 version. If you want to make use of the additional features, then you have to
       specify the platform identifier manually.
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifiers:
     </p>
@@ -47,7 +47,7 @@
       <li><code>Oracle9</code></li>
       <li><code>Oracle10</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC drivers:
     </p>
@@ -55,7 +55,7 @@
       <li><code>oracle.jdbc.driver.OracleDriver</code></li>
       <li><code>oracle.jdbc.dnlddriver.OracleDriver</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocols:
     </p>
@@ -64,7 +64,7 @@
       <li><code>jdbc:oracle:oci8</code></li>
       <li><code>jdbc:oracle:dnldthin</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -111,7 +111,7 @@
         <td class="platformPropValue">no</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>

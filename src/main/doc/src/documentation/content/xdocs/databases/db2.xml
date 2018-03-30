@@ -34,7 +34,7 @@
       mainly differ in the maximum identifier lengths (see below for details.) Note that you have to
       specify the v8 platform manually as the auto detection currently always selects the v7 platform.
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifiers:
     </p>
@@ -42,7 +42,7 @@
       <li><code>DB2</code> for the v7 platform</li>
       <li><code>DB2v8</code> for the v8 platform</li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC drivers:
     </p>
@@ -52,7 +52,7 @@
       <li><code>COM.ibm.db2os390.sqlj.jdbc.DB2SQLJDriver</code></li>
       <li><code>com.ibm.as400.access.AS400JDBCDriver</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocols:
     </p>
@@ -62,7 +62,7 @@
       <li><code>jdbc:2os390sqlj</code></li>
       <li><code>jdbc:as400</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -111,7 +111,7 @@
         <td class="platformPropValue">no</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>

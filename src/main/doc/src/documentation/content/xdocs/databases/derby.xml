@@ -38,7 +38,7 @@
       for Cloudscape is legacy and will likely be removed in future versions. If you use Cloudscape
       we strongly suggest that you update to Derby.
     </note>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifiers:
     </p>
@@ -46,7 +46,7 @@
       <li><code>Derby</code> for the Derby platform</li>
       <li><code>Cloudscape</code> for the Cloudscape platform</li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC drivers:
     </p>
@@ -54,7 +54,7 @@
       <li><code>org.apache.derby.jdbc.ClientDriver</code> (Derby)</li>
       <li><code>org.apache.derby.jdbc.EmbeddedDriver</code> (Derby)</li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocols:
     </p>
@@ -63,7 +63,7 @@
       <li><code>jdbc:db2j:net</code> (Cloudscape)</li>
       <li><code>jdbc:cloudscape:net</code> (Cloudscape)</li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -110,7 +110,7 @@
         <td class="platformPropValue">no</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>

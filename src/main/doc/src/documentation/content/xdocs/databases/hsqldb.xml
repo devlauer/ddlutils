@@ -28,28 +28,28 @@
       SQL Documentation for HSQLDB can be found in the distribution, and for the newest version
       <a href="ext:hsqldb/sql-syntax">here</a>.
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifier:
     </p>
     <ul>
       <li><code>HsqlDb</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC driver:
     </p>
     <ul>
       <li><code>org.hsqldb.jdbcDriver</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocol:
     </p>
     <ul>
       <li><code>jdbc:hsqldb</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -96,7 +96,7 @@
         <td class="platformPropValue">no</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>

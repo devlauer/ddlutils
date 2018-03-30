@@ -34,14 +34,14 @@
       older) provided my Microsoft, are known to be buggy and slow. The new SQL Server 2005 driver is preferred
       and can also work with SQL Server 2000.
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifier:
     </p>
     <ul>
       <li><code>MsSql</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC drivers:
     </p>
@@ -49,7 +49,7 @@
       <li><code>com.microsoft.jdbc.sqlserver.SQLServerDriver</code></li>
       <li><code>com.microsoft.sqlserver.jdbc.SQLServerDriver</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocols:
     </p>
@@ -58,7 +58,7 @@
       <li><code>jdbc:sqlserver</code></li>
       <li><code>jdbc:sqljdbc</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -105,7 +105,7 @@
         <td class="platformPropValue">no</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>

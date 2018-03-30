@@ -27,28 +27,28 @@
       DdlUtils supports <a href="ext:postgresql">PostgreSQL</a> version <strong>7.2.8</strong> and newer. SQL syntax
       details and supported datatypes are described in the <a href="ext:postgresql/manual">Manual</a>.
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifier:
     </p>
     <ul>
       <li><code>PostgreSql</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC driver:
     </p>
     <ul>
       <li><code>org.postgresql.Driver</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocol:
     </p>
     <ul>
       <li><code>jdbc:postgresql</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -95,7 +95,7 @@
         <td class="platformPropValue">yes</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>

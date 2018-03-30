@@ -116,8 +116,8 @@
         </li>
         <li>
           If the column name is not a valid XML attribute name or it is longer than 255 characters or it contains illegal characters, then instead
-          a <column-name> sub element is used with the column name as the text content (base64 encoded if necessary). The value will be in a
-          corresponding <column-value> sub element:
+          a <![CDATA[ <column-name> ]]> sub element is used with the column name as the text content (base64 encoded if necessary). The value will be in a
+          corresponding <![CDATA[ <column-value> ]]> sub element:
           <source><![CDATA[
 <MyTable ...>
   <column>

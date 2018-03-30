@@ -40,7 +40,7 @@
     <p>
       Here is a short summary of the information about the JDBC data types:
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th>JDBC data type</th>

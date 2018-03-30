@@ -30,7 +30,7 @@
       <a href="ext:sapdb/manual">Reference manual</a>. Likewise, documentation for MaxDB is contained in
       the <a href="ext:maxdb/manual">MaxDB documentation</a>.
     </p>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Platform identifiers:
     </p>
@@ -38,21 +38,21 @@
       <li><code>MaxDB</code></li>
       <li><code>SapDB</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC driver:
     </p>
     <ul>
       <li><code>com.sap.dbtech.jdbc.DriverSapDB</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <p>
       Recognized JDBC sub protocol:
     </p>
     <ul>
       <li><code>jdbc:sapdb</code></li>
     </ul>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <td class="platformPropName">The database supports SQL comments</td>
@@ -99,7 +99,7 @@
         <td class="platformPropValue">no</td>
       </tr>
     </table>
-    <p>&nbsp;</p>
+    <p>&amp;#160;</p>
     <table>
       <tr>
         <th class="typeMappingJdbcType">JDBC Type</th>
