@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.collections.map.ListOrderedMap;
 import org.apache.commons.lang.StringUtils;
@@ -91,8 +92,11 @@ public class JdbcModelReader
     private String[] _defaultTableTypes = { "TABLE" };
     /** The active connection while reading a database model. */
     private Connection _connection;
+    
+    /** The search string pattern. */
+    private Pattern _searchStringPattern;
 
-    /**
+	/**
      * Creates a new model reader instance.
      * 
      * @param platform The plaftform this builder belongs to
@@ -453,31 +457,45 @@ public class JdbcModelReader
     }
 
     /**
-     * Reads the database model from the given connection.
-     * 
-     * @param connection The connection
-     * @param name       The name of the resulting database; <code>null</code> when the default name (the catalog)
-     *                   is desired which might be <code>null</code> itself though
-     * @return The database model
-     * @throws SQLException 
-     */
+	 * Reads the database model from the given connection.
+	 *
+	 * @param connection
+	 *            The connection
+	 * @param name
+	 *            The name of the resulting database; <code>null</code> when the
+	 *            default name (the catalog) is desired which might be
+	 *            <code>null</code> itself though
+	 * @return The database model
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     public Database getDatabase(Connection connection, String name) throws SQLException
     {
         return getDatabase(connection, name, null, null, null);
     }
 
     /**
-     * Reads the database model from the given connection.
-     * 
-     * @param connection The connection
-     * @param name       The name of the resulting database; <code>null</code> when the default name (the catalog)
-     *                   is desired which might be <code>null</code> itself though
-     * @param catalog    The catalog to acess in the database; use <code>null</code> for the default value
-     * @param schema     The schema to acess in the database; use <code>null</code> for the default value
-     * @param tableTypes The table types to process; use <code>null</code> or an empty list for the default ones
-     * @return The database model
-     * @throws SQLException 
-     */
+	 * Reads the database model from the given connection.
+	 *
+	 * @param connection
+	 *            The connection
+	 * @param name
+	 *            The name of the resulting database; <code>null</code> when the
+	 *            default name (the catalog) is desired which might be
+	 *            <code>null</code> itself though
+	 * @param catalog
+	 *            The catalog to acess in the database; use <code>null</code> for
+	 *            the default value
+	 * @param schema
+	 *            The schema to acess in the database; use <code>null</code> for the
+	 *            default value
+	 * @param tableTypes
+	 *            The table types to process; use <code>null</code> or an empty list
+	 *            for the default ones
+	 * @return The database model
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     public Database getDatabase(Connection connection, String name, String catalog, String schema, String[] tableTypes) throws SQLException
     {
         Database db = new Database();
@@ -521,13 +539,21 @@ public class JdbcModelReader
     }
 
     /**
-     * Reads the tables from the database metadata.
-     * 
-     * @param catalog       The catalog to acess in the database; use <code>null</code> for the default value
-     * @param schemaPattern The schema(s) to acess in the database; use <code>null</code> for the default value
-     * @param tableTypes    The table types to process; use <code>null</code> or an empty list for the default ones
-     * @return The tables
-     */
+	 * Reads the tables from the database metadata.
+	 *
+	 * @param catalog
+	 *            The catalog to acess in the database; use <code>null</code> for
+	 *            the default value
+	 * @param schemaPattern
+	 *            The schema(s) to acess in the database; use <code>null</code> for
+	 *            the default value
+	 * @param tableTypes
+	 *            The table types to process; use <code>null</code> or an empty list
+	 *            for the default ones
+	 * @return The tables
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Collection<Table> readTables(String catalog, String schemaPattern, String[] tableTypes) throws SQLException
     {
         ResultSet tableData = null;
@@ -540,6 +566,8 @@ public class JdbcModelReader
             metaData.setCatalog(catalog == null ? getDefaultCatalogPattern() : catalog);
             metaData.setSchemaPattern(schemaPattern == null ? getDefaultSchemaPattern() : schemaPattern);
             metaData.setTableTypes((tableTypes == null) || (tableTypes.length == 0) ? getDefaultTableTypes() : tableTypes);
+            if(_searchStringPattern!=null)
+            	metaData.setSearchStringPattern(_searchStringPattern);
             
             tableData = metaData.getTables(getDefaultTablePattern());
 
@@ -573,12 +601,18 @@ public class JdbcModelReader
     }
 
     /**
-     * Reads the next table from the meta data.
-     * 
-     * @param metaData The database meta data
-     * @param values   The table metadata values as defined by {@link #getColumnsForTable()}
-     * @return The table or <code>null</code> if the result set row did not contain a valid table
-     */
+	 * Reads the next table from the meta data.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param values
+	 *            The table metadata values as defined by
+	 *            {@link #getColumnsForTable()}
+	 * @return The table or <code>null</code> if the result set row did not contain
+	 *         a valid table
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Table readTable(DatabaseMetaDataWrapper metaData, Map<String, Object> values) throws SQLException
     {
         String tableName = (String)values.get("TABLE_NAME");
@@ -615,12 +649,16 @@ public class JdbcModelReader
 
 
     /**
-     * Removes system indices (generated by the database for primary and foreign keys)
-     * from the table.
-     * 
-     * @param metaData The database meta data
-     * @param table    The table
-     */
+	 * Removes system indices (generated by the database for primary and foreign
+	 * keys) from the table.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param table
+	 *            The table
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected void removeSystemIndices(DatabaseMetaDataWrapper metaData, Table table) throws SQLException
     {
         removeInternalPrimaryKeyIndex(metaData, table);
@@ -632,11 +670,15 @@ public class JdbcModelReader
     }
 
     /**
-     * Tries to remove the internal index for the table's primary key.
-     * 
-     * @param metaData The database meta data
-     * @param table    The table
-     */
+	 * Tries to remove the internal index for the table's primary key.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param table
+	 *            The table
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected void removeInternalPrimaryKeyIndex(DatabaseMetaDataWrapper metaData, Table table) throws SQLException
     {
         Column[] pks         = table.getPrimaryKeyColumns();
@@ -664,12 +706,17 @@ public class JdbcModelReader
     }
 
     /**
-     * Tries to remove the internal index for the given foreign key.
-     * 
-     * @param metaData The database meta data
-     * @param table    The table where the table is defined
-     * @param fk       The foreign key
-     */
+	 * Tries to remove the internal index for the given foreign key.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param table
+	 *            The table where the table is defined
+	 * @param fk
+	 *            The foreign key
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected void removeInternalForeignKeyIndex(DatabaseMetaDataWrapper metaData, Table table, ForeignKey fk) throws SQLException
     {
         List<String>    columnNames  = new ArrayList<>();
@@ -729,47 +776,62 @@ public class JdbcModelReader
     }
 
     /**
-     * Tries to determine whether the index is the internal database-generated index
-     * for the given table's primary key.
-     * Note that only unique indices with the correct columns are fed to this method.
-     * Redefine this method for specific platforms if there are better ways
-     * to determine internal indices.
-     * 
-     * @param metaData The database meta data
-     * @param table    The table owning the index
-     * @param index    The index to check
-     * @return <code>true</code> if the index seems to be an internal primary key one
-     */
+	 * Tries to determine whether the index is the internal database-generated index
+	 * for the given table's primary key. Note that only unique indices with the
+	 * correct columns are fed to this method. Redefine this method for specific
+	 * platforms if there are better ways to determine internal indices.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param table
+	 *            The table owning the index
+	 * @param index
+	 *            The index to check
+	 * @return <code>true</code> if the index seems to be an internal primary key
+	 *         one
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected boolean isInternalPrimaryKeyIndex(DatabaseMetaDataWrapper metaData, Table table, Index index) throws SQLException
     {
         return false;
     }
 
     /**
-     * Tries to determine whether the index is the internal database-generated index
-     * for the given foreign key.
-     * Note that only non-unique indices with the correct columns are fed to this method.
-     * Redefine this method for specific platforms if there are better ways
-     * to determine internal indices.
-     * 
-     * @param metaData The database meta data
-     * @param table    The table owning the index and foreign key
-     * @param fk       The foreign key
-     * @param index    The index to check
-     * @return <code>true</code> if the index seems to be an internal primary key one
-     */
+	 * Tries to determine whether the index is the internal database-generated index
+	 * for the given foreign key. Note that only non-unique indices with the correct
+	 * columns are fed to this method. Redefine this method for specific platforms
+	 * if there are better ways to determine internal indices.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param table
+	 *            The table owning the index and foreign key
+	 * @param fk
+	 *            The foreign key
+	 * @param index
+	 *            The index to check
+	 * @return <code>true</code> if the index seems to be an internal primary key
+	 *         one
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected boolean isInternalForeignKeyIndex(DatabaseMetaDataWrapper metaData, Table table, ForeignKey fk, Index index) throws SQLException
     {
         return false;
     }
 
     /**
-     * Reads the column definitions for the indicated table.
-     * 
-     * @param metaData  The database meta data
-     * @param tableName The name of the table
-     * @return The columns
-     */
+	 * Reads the column definitions for the indicated table.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param tableName
+	 *            The name of the table
+	 * @return The columns
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Collection<Column> readColumns(DatabaseMetaDataWrapper metaData, String tableName) throws SQLException
     {
         ResultSet columnData = null;
@@ -795,12 +857,17 @@ public class JdbcModelReader
     }
 
     /**
-     * Extracts a column definition from the result set.
-     * 
-     * @param metaData The database meta data
-     * @param values   The column meta data values as defined by {@link #getColumnsForColumn()}
-     * @return The column
-     */
+	 * Extracts a column definition from the result set.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param values
+	 *            The column meta data values as defined by
+	 *            {@link #getColumnsForColumn()}
+	 * @return The column
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Column readColumn(DatabaseMetaDataWrapper metaData, Map<String, Object> values) throws SQLException
     {
         Column column = new Column();
@@ -846,12 +913,17 @@ public class JdbcModelReader
     }
 
     /**
-     * Retrieves the names of the columns that make up the primary key for a given table.
-     *
-     * @param metaData  The database meta data
-     * @param tableName The name of the table from which to retrieve PK information
-     * @return The primary key column names
-     */
+	 * Retrieves the names of the columns that make up the primary key for a given
+	 * table.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param tableName
+	 *            The name of the table from which to retrieve PK information
+	 * @return The primary key column names
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Collection<String> readPrimaryKeyNames(DatabaseMetaDataWrapper metaData, String tableName) throws SQLException
     {
         List<String>      pks   = new ArrayList<>();
@@ -875,24 +947,33 @@ public class JdbcModelReader
     }
 
     /**
-     * Extracts a primary key name from the result set.
-     *
-     * @param metaData The database meta data
-     * @param values   The primary key meta data values as defined by {@link #getColumnsForPK()}
-     * @return The primary key name
-     */
+	 * Extracts a primary key name from the result set.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param values
+	 *            The primary key meta data values as defined by
+	 *            {@link #getColumnsForPK()}
+	 * @return The primary key name
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected String readPrimaryKeyName(DatabaseMetaDataWrapper metaData, Map<String, Object> values) throws SQLException
     {
         return (String)values.get("COLUMN_NAME");
     }
 
     /**
-     * Retrieves the foreign keys of the indicated table.
-     *
-     * @param metaData  The database meta data
-     * @param tableName The name of the table from which to retrieve FK information
-     * @return The foreign keys
-     */
+	 * Retrieves the foreign keys of the indicated table.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param tableName
+	 *            The name of the table from which to retrieve FK information
+	 * @return The foreign keys
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Collection<ForeignKey> readForeignKeys(DatabaseMetaDataWrapper metaData, String tableName) throws SQLException
     {
         @SuppressWarnings("unchecked")
@@ -918,12 +999,17 @@ public class JdbcModelReader
     }
 
     /**
-     * Reads the next foreign key spec from the result set.
-     *
-     * @param metaData The database meta data
-     * @param values   The foreign key meta data as defined by {@link #getColumnsForFK()}
-     * @param knownFks The already read foreign keys for the current table
-     */
+	 * Reads the next foreign key spec from the result set.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param values
+	 *            The foreign key meta data as defined by {@link #getColumnsForFK()}
+	 * @param knownFks
+	 *            The already read foreign keys for the current table
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected void readForeignKey(DatabaseMetaDataWrapper metaData, Map<String, Object> values, Map<String, ForeignKey> knownFks) throws SQLException
     {
         String     fkName = (String)values.get("FK_NAME");
@@ -995,12 +1081,16 @@ public class JdbcModelReader
     }
     
     /**
-     * Determines the indices for the indicated table.
-     * 
-     * @param metaData  The database meta data
-     * @param tableName The name of the table
-     * @return The list of indices
-     */
+	 * Determines the indices for the indicated table.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param tableName
+	 *            The name of the table
+	 * @return The list of indices
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Collection<Index> readIndices(DatabaseMetaDataWrapper metaData, String tableName) throws SQLException
     {
         @SuppressWarnings("unchecked")
@@ -1026,12 +1116,17 @@ public class JdbcModelReader
     }
 
     /**
-     * Reads the next index spec from the result set.
-     * 
-     * @param metaData     The database meta data
-     * @param values       The index meta data as defined by {@link #getColumnsForIndex()}
-     * @param knownIndices The already read indices for the current table
-     */
+	 * Reads the next index spec from the result set.
+	 *
+	 * @param metaData
+	 *            The database meta data
+	 * @param values
+	 *            The index meta data as defined by {@link #getColumnsForIndex()}
+	 * @param knownIndices
+	 *            The already read indices for the current table
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected void readIndex(DatabaseMetaDataWrapper metaData, Map<String, Object> values, Map<String, Index> knownIndices) throws SQLException
     {
         Short indexType = (Short)values.get("TYPE");
@@ -1075,12 +1170,16 @@ public class JdbcModelReader
     }
 
     /**
-     * Reads the indicated columns from the result set.
-     * 
-     * @param resultSet         The result set
-     * @param columnDescriptors The dscriptors of the columns to read
-     * @return The read values keyed by the column name
-     */
+	 * Reads the indicated columns from the result set.
+	 *
+	 * @param resultSet
+	 *            The result set
+	 * @param columnDescriptors
+	 *            The dscriptors of the columns to read
+	 * @return The read values keyed by the column name
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected Map<String, Object> readColumns(ResultSet resultSet, List<MetaDataColumnDescriptor> columnDescriptors) throws SQLException
     {
         HashMap<String, Object> values = new HashMap<>();
@@ -1095,12 +1194,16 @@ public class JdbcModelReader
     }
 
     /**
-     * Helper method that determines the auto increment status for the given columns via the
-     * {@link ResultSetMetaData#isAutoIncrement(int)} method.
-     * 
-     * @param table          The table
-     * @param columnsToCheck The columns to check (e.g. the primary key columns)
-     */
+	 * Helper method that determines the auto increment status for the given columns
+	 * via the {@link ResultSetMetaData#isAutoIncrement(int)} method.
+	 *
+	 * @param table
+	 *            The table
+	 * @param columnsToCheck
+	 *            The columns to check (e.g. the primary key columns)
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
     protected void determineAutoIncrementFromResultSetMetaData(Table table, Column[] columnsToCheck) throws SQLException
     {
         if ((columnsToCheck == null) || (columnsToCheck.length == 0))
@@ -1211,16 +1314,20 @@ public class JdbcModelReader
     }
 
     /**
-     * Tries to find the schema to which the given table belongs.
-     * 
-     * @param connection    The database connection
-     * @param schemaPattern The schema pattern to limit the schemas to search in
-     * @param table         The table to search for
-     * @return The schema name or <code>null</code> if the schema of the table
-     *         could not be found
-     * @throws SQLException 
-     * @deprecated Will be removed once full schema support is in place
-     */
+	 * Tries to find the schema to which the given table belongs.
+	 *
+	 * @param connection
+	 *            The database connection
+	 * @param schemaPattern
+	 *            The schema pattern to limit the schemas to search in
+	 * @param table
+	 *            The table to search for
+	 * @return The schema name or <code>null</code> if the schema of the table could
+	 *         not be found
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @deprecated Will be removed once full schema support is in place
+	 */
     public String determineSchemaOf(Connection connection, String schemaPattern, Table table) throws SQLException
     {
         ResultSet tableData  = null;
@@ -1234,6 +1341,9 @@ public class JdbcModelReader
             metaData.setCatalog(getDefaultCatalogPattern());
             metaData.setSchemaPattern(schemaPattern == null ? getDefaultSchemaPattern() : schemaPattern);
             metaData.setTableTypes(getDefaultTableTypes());
+            if(_searchStringPattern!=null)
+            	metaData.setSearchStringPattern(_searchStringPattern);
+            
 
             String tablePattern = table.getName();
 
@@ -1320,4 +1430,24 @@ public class JdbcModelReader
             }
         }
     }
+
+    /**
+	 * Gets the search string pattern.
+	 *
+	 * @return Pattern - the search string pattern
+	 */
+    public Pattern getSearchStringPattern() {
+		return _searchStringPattern;
+	}
+
+	/**
+	 * Sets the search string pattern.
+	 *
+	 * @param paramSearchStringPattern
+	 *            the search string pattern
+	 */
+	public void setSearchStringPattern(Pattern paramSearchStringPattern) {
+		this._searchStringPattern = paramSearchStringPattern;
+	}
+    
 }

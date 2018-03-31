@@ -30,8 +30,10 @@ import java.util.regex.Pattern;
 public class DatabaseMetaDataWrapper
 {
     /** Matches the characters not allowed in search strings. */
-    private final Pattern searchStringPattern = Pattern.compile("[_%]");
-    /** The database meta data. */
+    private Pattern searchStringPattern = Pattern.compile("[_%]");
+    
+
+	/** The database meta data. */
     private DatabaseMetaData _metaData;
     /** The catalog to acess in the database. */
     private String _catalog;
@@ -254,4 +256,24 @@ public class DatabaseMetaDataWrapper
     {
         return getMetaData().getIndexInfo(getCatalog(), getSchemaPattern(), tableNamePattern, unique, approximate);
     }
+
+    /**
+	 * Gets the search string pattern.
+	 *
+	 * @return Pattern - the search string pattern
+	 */
+    public Pattern getSearchStringPattern() {
+		return searchStringPattern;
+	}
+
+	/**
+	 * Sets the search string pattern.
+	 *
+	 * @param searchStringPattern
+	 *            the search string pattern
+	 */
+	public void setSearchStringPattern(Pattern searchStringPattern) {
+		this.searchStringPattern = searchStringPattern;
+	}
+    
 }

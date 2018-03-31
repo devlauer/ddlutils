@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import de.elnarion.ddlutils.Platform;
 import de.elnarion.ddlutils.model.Column;
@@ -51,6 +52,7 @@ public class H2ModelReader extends JdbcModelReader
         super(platform);
         setDefaultCatalogPattern(null);
         setDefaultSchemaPattern(null);
+        setSearchStringPattern(Pattern.compile("[%]"));
     }
 
     /**

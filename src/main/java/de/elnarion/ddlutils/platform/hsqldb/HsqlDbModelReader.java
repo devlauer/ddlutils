@@ -60,7 +60,7 @@ public class HsqlDbModelReader extends JdbcModelReader
         setDefaultSchemaPattern(null);
         _hsqldbTimePattern = Pattern.compile("'(\\d{2}):(\\d{2}):(\\d{2})(\\.\\d{1,8})?'");
 		_hsqldbTimestampPattern = Pattern.compile("TIMESTAMP'(\\d{4}\\-\\d{2}\\-\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})(\\.\\d{1,8})?'");
-
+		setSearchStringPattern(Pattern.compile("[%]"));
     }
 
     /**
