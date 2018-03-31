@@ -27,7 +27,7 @@ datasource.driverClassName=org.h2.Driver
 
 # Embedded mode
 
-datasource.url=jdbc:h2:file:target/database/ddlutils_h2
+datasource.url=jdbc:h2:file:./target/database/ddlutils_h2
 datasource.username=sa
 datasource.password=
 
