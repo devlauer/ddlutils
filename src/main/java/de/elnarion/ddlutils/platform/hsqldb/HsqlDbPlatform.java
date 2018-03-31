@@ -81,9 +81,9 @@ public class HsqlDbPlatform extends PlatformImplBase
         // JDBC's TINYINT requires a value range of -255 to 255, but HsqlDb's is only -128 to 127
         info.addNativeTypeMapping(Types.TINYINT,     "SMALLINT",      Types.SMALLINT);
 
-        info.setDefaultSize(Types.CHAR,      Integer.MAX_VALUE);
-        info.setDefaultSize(Types.VARCHAR,   Integer.MAX_VALUE);
-        info.setDefaultSize(Types.BINARY,    Integer.MAX_VALUE);
+        info.setDefaultSize(Types.CHAR,      8000);
+        info.setDefaultSize(Types.VARCHAR,   8000);
+        info.setDefaultSize(Types.BINARY,    8000);
         info.setDefaultSize(Types.VARBINARY, Integer.MAX_VALUE);
 
         setSqlBuilder(new HsqlDbBuilder(this));
