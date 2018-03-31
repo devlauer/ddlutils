@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import de.elnarion.ddlutils.platform.db2.Db2Platform;
+import de.elnarion.ddlutils.platform.db2.Db2v11Platform;
 import de.elnarion.ddlutils.platform.db2.Db2v8Platform;
 import de.elnarion.ddlutils.platform.derby.DerbyPlatform;
 import de.elnarion.ddlutils.platform.h2.H2Platform;
@@ -183,6 +184,7 @@ public class PlatformFactory
     {
         addPlatform(_platforms, Db2Platform.DATABASENAME,         Db2Platform.class);
         addPlatform(_platforms, Db2v8Platform.DATABASENAME,       Db2v8Platform.class);
+        addPlatform(_platforms, Db2v11Platform.DATABASENAME,      Db2v11Platform.class);
         addPlatform(_platforms, DerbyPlatform.DATABASENAME,       DerbyPlatform.class);
         addPlatform(_platforms, HsqlDbPlatform.DATABASENAME,      HsqlDbPlatform.class);
         addPlatform(_platforms, H2Platform.DATABASENAME,      	  H2Platform.class);
