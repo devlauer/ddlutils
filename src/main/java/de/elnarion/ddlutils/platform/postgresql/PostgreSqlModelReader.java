@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import de.elnarion.ddlutils.Platform;
 import de.elnarion.ddlutils.model.Column;
@@ -51,6 +52,7 @@ public class PostgreSqlModelReader extends JdbcModelReader
         setDefaultCatalogPattern(null);
         setDefaultSchemaPattern(null);
         setDefaultTablePattern(null);
+        setSearchStringPattern(Pattern.compile("[%]"));
     }
 
     /**
@@ -151,18 +153,20 @@ public class PostgreSqlModelReader extends JdbcModelReader
                 // "'some value'::character varying" or "'2000-01-01'::date"
                 switch (column.getTypeCode())
                 {
-                    case Types.INTEGER:
-                    case Types.BIGINT:
-                    case Types.DECIMAL:
-                    case Types.NUMERIC:
-                        defaultValue = extractUndelimitedDefaultValue(defaultValue);
-                        break;
+                	case Types.INTEGER:
                     case Types.CHAR:
                     case Types.VARCHAR:
                     case Types.LONGVARCHAR:
                     case Types.DATE:
                     case Types.TIME:
                     case Types.TIMESTAMP:
+                    case Types.REAL:
+                    case Types.NUMERIC:
+                    case Types.BIGINT:
+                    case Types.DECIMAL:
+                    case Types.TINYINT:
+                    case Types.SMALLINT:
+                    case Types.DOUBLE:
                         defaultValue = extractDelimitedDefaultValue(defaultValue);
                         break;
                 }
@@ -199,26 +203,6 @@ public class PostgreSqlModelReader extends JdbcModelReader
         return defaultValue;
     }
     
-    /**
-     * Extractes the default value from a default value spec of the form
-     * "-9000000000000000000::bigint".
-     * 
-     * @param defaultValue The default value spec
-     * @return The default value
-     */
-    private String extractUndelimitedDefaultValue(String defaultValue)
-    {
-        int valueEnd = defaultValue.indexOf("::");
-
-        if (valueEnd > 0)
-        {
-            return defaultValue.substring(0, valueEnd);
-        }
-        else
-        {
-            return defaultValue;
-        }
-    }
     
     /**
      * {@inheritDoc}

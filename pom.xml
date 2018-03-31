@@ -215,6 +215,75 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>postgresql</id>
+			<activation>
+				<property>
+					<name>testDb</name>
+					<value>postgresql</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>42.2.2</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<systemProperties>
+								<property>
+									<name>jdbc.properties.file</name>
+									<value>/jdbc.properties.postgresql</value>
+								</property>
+							</systemProperties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>db2</id>
+			<activation>
+				<property>
+					<name>testDb</name>
+					<value>db2</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.ibm.db2.jcc</groupId>
+					<artifactId>db2jcc4</artifactId>
+					<version>11.1</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<systemProperties>
+								<property>
+									<name>jdbc.properties.file</name>
+									<value>/jdbc.properties.db2</value>
+								</property>
+							</systemProperties>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 		<profile>
 			<id>hsqldb</id>
 			<activation>

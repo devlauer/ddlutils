@@ -4,7 +4,6 @@ import de.elnarion.ddlutils.TestPlatformBase;
 import de.elnarion.ddlutils.io.DatabaseIO;
 import de.elnarion.ddlutils.platform.hsqldb.HsqlDbPlatform;
 
-// TODO: Auto-generated Javadoc
 /**
  * Tests the Hsqldb platform.
  * 
@@ -34,7 +33,7 @@ public class TestHsqlDbPlatform extends TestPlatformBase
             "(\n" + //
             "    \"COL_ARRAY\"           LONGVARBINARY,\n"+
             "    \"COL_BIGINT\"          BIGINT,\n"+
-            "    \"COL_BINARY\"          BINARY("+Integer.MAX_VALUE+"),\n"+
+            "    \"COL_BINARY\"          BINARY(8000),\n"+
             "    \"COL_BIT\"             BOOLEAN,\n"+
             "    \"COL_BLOB\"            LONGVARBINARY,\n"+
             "    \"COL_BOOLEAN\"         BOOLEAN,\n"+
