@@ -20,7 +20,10 @@ package de.elnarion.ddlutils.platform.hsqldb;
  */
 
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.elnarion.ddlutils.Platform;
 import de.elnarion.ddlutils.model.Column;
@@ -38,6 +41,13 @@ import de.elnarion.ddlutils.platform.JdbcModelReader;
  */
 public class HsqlDbModelReader extends JdbcModelReader
 {
+
+	/** The regular expression pattern for the time values that hsql returns. */
+	private Pattern _hsqldbTimePattern;
+	/** The regular expression pattern for the timestamp values that hsql returns. */
+	private Pattern _hsqldbTimestampPattern;
+	
+	
     /**
      * Creates a new model reader for HsqlDb databases.
      * 
@@ -48,6 +58,9 @@ public class HsqlDbModelReader extends JdbcModelReader
         super(platform);
         setDefaultCatalogPattern(null);
         setDefaultSchemaPattern(null);
+        _hsqldbTimePattern = Pattern.compile("'(\\d{2}):(\\d{2}):(\\d{2})(\\.\\d{1,8})?'");
+		_hsqldbTimestampPattern = Pattern.compile("TIMESTAMP'(\\d{4}\\-\\d{2}\\-\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})(\\.\\d{1,8})?'");
+
     }
 
     /**
@@ -77,6 +90,62 @@ public class HsqlDbModelReader extends JdbcModelReader
     {
         Column column = super.readColumn(metaData, values);
 
+        if (column.getDefaultValue() != null)
+		{
+			if (column.getTypeCode() == Types.TIME)
+			{
+				Matcher matcher = _hsqldbTimePattern.matcher(column.getDefaultValue());
+
+				if (matcher.matches())
+				{
+					StringBuffer newDefault = new StringBuffer();
+
+					newDefault.append("'");
+					// the hour
+					newDefault.append(matcher.group(1));
+					newDefault.append(":");
+					// the minute
+					newDefault.append(matcher.group(2));
+					newDefault.append(":");
+					// the second
+					newDefault.append(matcher.group(3));
+					newDefault.append("'");
+
+					column.setDefaultValue(newDefault.toString());
+				}
+			}
+			else if (column.getTypeCode() == Types.TIMESTAMP)
+			{
+                Matcher matcher = _hsqldbTimestampPattern.matcher(column.getDefaultValue());
+
+				if (matcher.matches())
+				{
+					StringBuffer newDefault = new StringBuffer();
+
+					newDefault.append("'");
+					// group 1 is the date which has the correct format
+					newDefault.append(matcher.group(1));
+					newDefault.append(" ");
+					// the hour
+					newDefault.append(matcher.group(2));
+					newDefault.append(":");
+					// the minute
+					newDefault.append(matcher.group(3));
+					newDefault.append(":");
+					// the second
+					newDefault.append(matcher.group(4));
+					// optionally, the fraction
+					if ((matcher.groupCount() >= 5) && (matcher.group(5) != null))
+					{
+						newDefault.append(matcher.group(5));
+					}
+					newDefault.append("'");
+
+					column.setDefaultValue(newDefault.toString());
+				}
+			}
+		}
+        
         if (TypeMap.isTextType(column.getTypeCode()) &&
             (column.getDefaultValue() != null))
         {

@@ -31,7 +31,6 @@ import de.elnarion.ddlutils.model.Table;
 import de.elnarion.ddlutils.platform.ModelBasedResultSetIterator;
 import junit.framework.Test;
 
-// TODO: Auto-generated Javadoc
 /**
  * Tests the sql querying.
  * 

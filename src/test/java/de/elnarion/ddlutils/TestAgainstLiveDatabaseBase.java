@@ -174,11 +174,13 @@ public abstract class TestAgainstLiveDatabaseBase extends TestPlatformBase
 
         try
         {
-            propStream = TestAgainstLiveDatabaseBase.class.getResourceAsStream(propFile);
+            propStream = TestAgainstLiveDatabaseBase.class.getClassLoader().getResourceAsStream(propFile);
 
             if (propStream == null)
             {
-                propStream = new FileInputStream(propFile);
+            	propStream = TestAgainstLiveDatabaseBase.class.getResourceAsStream(propFile);
+            	if(propStream==null)
+            		propStream = new FileInputStream(propFile);
             }
 
             Properties props = new Properties();

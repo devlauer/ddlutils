@@ -24,6 +24,7 @@ import java.io.IOException;
 import de.elnarion.ddlutils.Platform;
 import de.elnarion.ddlutils.alteration.ColumnDefinitionChange;
 import de.elnarion.ddlutils.model.Column;
+import de.elnarion.ddlutils.model.Index;
 import de.elnarion.ddlutils.model.ModelException;
 import de.elnarion.ddlutils.model.Table;
 import de.elnarion.ddlutils.model.TypeMap;
@@ -34,160 +35,162 @@ import de.elnarion.ddlutils.platform.SqlBuilder;
  * 
  * @version $Revision$
  */
-public class HsqlDbBuilder extends SqlBuilder
-{
-    /**
-     * Creates a new builder instance.
-     * 
-     * @param platform The plaftform this builder belongs to
-     */
-    public HsqlDbBuilder(Platform platform)
-    {
-        super(platform);
-        addEscapedCharSequence("'", "''");
-    }
+public class HsqlDbBuilder extends SqlBuilder {
+	/**
+	 * Creates a new builder instance.
+	 * 
+	 * @param platform
+	 *            The plaftform this builder belongs to
+	 */
+	public HsqlDbBuilder(Platform platform) {
+		super(platform);
+		addEscapedCharSequence("'", "''");
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public void dropTable(Table table) throws IOException
-    { 
-        print("DROP TABLE ");
-        printIdentifier(getTableName(table));
-        print(" IF EXISTS");
-        printEndOfStatement();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public void dropTable(Table table) throws IOException {
+		print("DROP TABLE ");
+		printIdentifier(getTableName(table));
+		print(" IF EXISTS");
+		printEndOfStatement();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getSelectLastIdentityValues(Table table) 
-    {
-        return "CALL IDENTITY()";
-    }
+	/**
+	 * Generates the statement to drop a non-embedded index from the database.
+	 *
+	 * @param table
+	 *            The table the index is on
+	 * @param index
+	 *            The index to drop
+	 * @throws IOException
+	 */
+	public void dropIndex(Table table, Index index) throws IOException {
+		print("DROP INDEX ");
+		printIdentifier(getIndexName(index));
+		print(" IF EXISTS");
+		printEndOfStatement();
+	}
 
-    /**
-     * Writes the SQL to add/insert a column.
-     * 
-     * @param table      The table
-     * @param newColumn  The new column
-     * @param nextColumn The column before which the new column shall be added; <code>null</code>
-     *                   if the new column is to be added instead of inserted
-     * @throws IOException 
-     */
-    public void insertColumn(Table table, Column newColumn, Column nextColumn) throws IOException
-    {
-        print("ALTER TABLE ");
-        printlnIdentifier(getTableName(table));
-        printIndent();
-        print("ADD COLUMN ");
-        writeColumn(table, newColumn);
-        if (nextColumn != null)
-        {
-            print(" BEFORE ");
-            printIdentifier(getColumnName(nextColumn));
-        }
-        printEndOfStatement();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public String getSelectLastIdentityValues(Table table) {
+		return "CALL IDENTITY()";
+	}
 
-    /**
-     * Writes the SQL to drop a column.
-     * 
-     * @param table  The table
-     * @param column The column to drop
-     * @throws IOException 
-     */
-    public void dropColumn(Table table, Column column) throws IOException
-    {
-        print("ALTER TABLE ");
-        printlnIdentifier(getTableName(table));
-        printIndent();
-        print("DROP COLUMN ");
-        printIdentifier(getColumnName(column));
-        printEndOfStatement();
-    }
+	/**
+	 * Writes the SQL to add/insert a column.
+	 * 
+	 * @param table
+	 *            The table
+	 * @param newColumn
+	 *            The new column
+	 * @param nextColumn
+	 *            The column before which the new column shall be added;
+	 *            <code>null</code> if the new column is to be added instead of
+	 *            inserted
+	 * @throws IOException
+	 */
+	public void insertColumn(Table table, Column newColumn, Column nextColumn) throws IOException {
+		print("ALTER TABLE ");
+		printlnIdentifier(getTableName(table));
+		printIndent();
+		print("ADD COLUMN ");
+		writeColumn(table, newColumn);
+		if (nextColumn != null) {
+			print(" BEFORE ");
+			printIdentifier(getColumnName(nextColumn));
+		}
+		printEndOfStatement();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void writeColumn(Table table, Column column) throws IOException
-    {
-        //see comments in columnsDiffer about null/"" defaults
-        printIdentifier(getColumnName(column));
-        print(" ");
-        print(getSqlType(column));
-        if (column.isAutoIncrement())
-        {
-            if (!column.isPrimaryKey())
-            {
-                throw new ModelException("Column "+column.getName()+" in table "+table.getName()+" is auto-incrementing but not a primary key column, which is not supported by the platform");
-            }
-            print(" ");
-            writeColumnAutoIncrementStmt(table, column);
-        }
-        else
-        {
-            writeColumnDefaultValueStmt(table, column);
-        }
-        if (column.isRequired())
-        {
-            print(" ");
-            writeColumnNotNullableStmt();
-        }
-        else if (getPlatformInfo().isNullAsDefaultValueRequired() &&
-                 getPlatformInfo().hasNullDefault(column.getTypeCode()))
-        {
-            print(" ");
-            writeColumnNullableStmt();
-        }
-    }
+	/**
+	 * Writes the SQL to drop a column.
+	 * 
+	 * @param table
+	 *            The table
+	 * @param column
+	 *            The column to drop
+	 * @throws IOException
+	 */
+	public void dropColumn(Table table, Column column) throws IOException {
+		print("ALTER TABLE ");
+		printlnIdentifier(getTableName(table));
+		printIndent();
+		print("DROP COLUMN ");
+		printIdentifier(getColumnName(column));
+		printEndOfStatement();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void writeColumnAutoIncrementStmt(Table table, Column column) throws IOException
-    {
-        print("GENERATED BY DEFAULT AS IDENTITY(START WITH 1)");
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void writeColumn(Table table, Column column) throws IOException {
+		// see comments in columnsDiffer about null/"" defaults
+		printIdentifier(getColumnName(column));
+		print(" ");
+		print(getSqlType(column));
+		if (column.isAutoIncrement()) {
+			if (!column.isPrimaryKey()) {
+				throw new ModelException("Column " + column.getName() + " in table " + table.getName()
+						+ " is auto-incrementing but not a primary key column, which is not supported by the platform");
+			}
+			print(" ");
+			writeColumnAutoIncrementStmt(table, column);
+		} else {
+			writeColumnDefaultValueStmt(table, column);
+		}
+		if (column.isRequired()) {
+			print(" ");
+			writeColumnNotNullableStmt();
+		} else if (getPlatformInfo().isNullAsDefaultValueRequired()
+				&& getPlatformInfo().hasNullDefault(column.getTypeCode())) {
+			print(" ");
+			writeColumnNullableStmt();
+		}
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    protected void writeCastExpression(Column sourceColumn, Column targetColumn) throws IOException
-    {
-        boolean sizeChanged = ColumnDefinitionChange.isSizeChanged(getPlatformInfo(), sourceColumn, targetColumn);
-        boolean typeChanged = ColumnDefinitionChange.isTypeChanged(getPlatformInfo(), sourceColumn, targetColumn);
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void writeColumnAutoIncrementStmt(Table table, Column column) throws IOException {
+		print("GENERATED BY DEFAULT AS IDENTITY(START WITH 1)");
+	}
 
-        if (sizeChanged || typeChanged)
-        {
-            boolean needSubstr = TypeMap.isTextType(targetColumn.getTypeCode()) && sizeChanged && (sourceColumn.getSizeAsInt() > targetColumn.getSizeAsInt());
+	/**
+	 * {@inheritDoc}
+	 */
+	protected void writeCastExpression(Column sourceColumn, Column targetColumn) throws IOException {
+		boolean sizeChanged = ColumnDefinitionChange.isSizeChanged(getPlatformInfo(), sourceColumn, targetColumn);
+		boolean typeChanged = ColumnDefinitionChange.isTypeChanged(getPlatformInfo(), sourceColumn, targetColumn);
 
-            if (needSubstr)
-            {
-                print("SUBSTR(");
-            }
-            print("CAST(");
-            printIdentifier(getColumnName(sourceColumn));
-            print(" AS ");
-            if (needSubstr)
-            {
-                print(getNativeType(targetColumn));
-            }
-            else
-            {
-                print(getSqlType(targetColumn));
-            }
-            print(")");
-            if (needSubstr)
-            {
-                print(",1,");
-                print(targetColumn.getSize());
-                print(")");
-            }
-        }
-        else
-        {
-            super.writeCastExpression(sourceColumn, targetColumn);
-        }
-    }
+		if (sizeChanged || typeChanged) {
+			boolean needSubstr = TypeMap.isTextType(targetColumn.getTypeCode()) && sizeChanged
+					&& targetColumn.getSize() != null && (sourceColumn.getSizeAsInt() > targetColumn.getSizeAsInt());
+
+			if (needSubstr) {
+				print("LEFT(");
+			}
+			print("CAST(");
+			printIdentifier(getColumnName(sourceColumn));
+			print(" AS ");
+			// it is not possible to do a substring on a sql type which is too short for the
+			// original value so use longvarchar instead and do a substring/left
+			if (needSubstr) {
+				print("LONGVARCHAR ");
+			} else {
+				print(getSqlType(targetColumn));
+			}
+			print(")");
+			if (needSubstr) {
+				print(",");
+				print(targetColumn.getSize());
+				print(")");
+			}
+		} else {
+			super.writeCastExpression(sourceColumn, targetColumn);
+		}
+	}
 }
