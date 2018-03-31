@@ -26,7 +26,6 @@ import org.apache.commons.beanutils.DynaBean;
 
 import de.elnarion.ddlutils.TestAgainstLiveDatabaseBase;
 import de.elnarion.ddlutils.platform.h2.H2Platform;
-import de.elnarion.ddlutils.platform.hsqldb.HsqlDbPlatform;
 import de.elnarion.ddlutils.platform.maxdb.MaxDbPlatform;
 import de.elnarion.ddlutils.platform.mysql.MySql50Platform;
 import de.elnarion.ddlutils.platform.mysql.MySqlPlatform;
@@ -295,7 +294,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
 
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
@@ -843,7 +841,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
 
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
@@ -1157,7 +1154,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
 
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
@@ -1512,7 +1508,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(2),  beans.get(0), "avalue1");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
@@ -1873,7 +1868,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(2), beans.get(0), "avalue1");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
@@ -2232,7 +2226,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(1), beans2.get(0), "pk");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
@@ -2814,7 +2807,6 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(1), beans2.get(0), "avalue1");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
