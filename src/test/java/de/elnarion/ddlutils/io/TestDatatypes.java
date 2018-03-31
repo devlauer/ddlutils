@@ -26,6 +26,9 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -752,12 +755,9 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
             "  </table>\n"+
             "</database>";
 
-        // we would use Calendar but that might give Locale problems
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(Calendar.YEAR, 103);
-        cal.set(Calendar.MONTH, 11);
-        cal.set(Calendar.DAY_OF_MONTH, 25);
-        performDataTypeTest(modelXml, null, new Date(cal.getTimeInMillis()));
+        LocalDate localDate = LocalDate.of(2003, 12, 25);
+        Date date = Date.valueOf(localDate);
+        performDataTypeTest(modelXml, null, date);
     }
 
     /**
@@ -773,13 +773,10 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
             "    <column name='avalue' type='DATE' required='true' default='2000-01-01'/>\n"+
             "  </table>\n"+
             "</database>";
-
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(Calendar.YEAR, 105);
-        cal.set(Calendar.MONTH, 0);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        Date date1 = new Date(cal.getTimeInMillis());
-        Date date2 = new Date(cal.getTimeInMillis());
+        
+        LocalDate localDate = LocalDate.of(2000, 1, 1);
+        Date date1 = Date.valueOf(localDate);
+        Date date2 = Date.valueOf(localDate);
         
         performDataTypeTest(modelXml, date1, null, date2);
     }
@@ -798,12 +795,8 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
             "  </table>\n"+
             "</database>";
 
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 3);
-        cal.set(Calendar.MINUTE, 47);
-        cal.set(Calendar.SECOND, 15);
-        Time time = new Time(cal.getTimeInMillis());
-
+        LocalTime localTime= LocalTime.of(3, 47, 15, 0);
+        Time time = Time.valueOf(localTime);
         performDataTypeTest(modelXml, time, null);
     }
 
@@ -820,15 +813,11 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
             "    <column name='avalue' type='TIME' required='true' default='11:27:03'/>\n"+
             "  </table>\n"+
             "</database>";
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 59);
-        Time time1 = new Time(cal.getTimeInMillis());
-        cal.set(Calendar.HOUR_OF_DAY, 11);
-        cal.set(Calendar.MINUTE, 27);
-        cal.set(Calendar.SECOND, 3);
-        Time time2 = new Time(cal.getTimeInMillis());
+        
+        LocalTime localTime1= LocalTime.of(23, 59, 59, 0);
+        Time time1 = Time.valueOf(localTime1);
+        LocalTime localTime2= LocalTime.of(11, 27, 03, 0);
+        Time time2 = Time.valueOf(localTime2);
         
 
         performDataTypeTest(modelXml, time1, null, time2);
@@ -848,24 +837,11 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
             "  </table>\n"+
             "</database>";
 
-        // we would use Calendar but that might give Locale problems
-        // also we leave out the fractional part because databases differ
-        // in their support here
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(Calendar.YEAR, 70);
-        cal.set(Calendar.MONTH, 0);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        Timestamp timestamp1 = new Timestamp(cal.getTimeInMillis());
-        cal.set(Calendar.YEAR, 100);
-        cal.set(Calendar.MONTH, 10);
-        cal.set(Calendar.DAY_OF_MONTH, 11);
-        cal.set(Calendar.HOUR_OF_DAY, 10);
-        cal.set(Calendar.MINUTE, 10);
-        cal.set(Calendar.SECOND, 10);
-        Timestamp timestamp2 = new Timestamp(cal.getTimeInMillis());
+        LocalDateTime localDateTime1 = LocalDateTime.of(1970, 1, 1, 0, 0, 0, 0);
+        LocalDateTime localDateTime2 = LocalDateTime.of(2000, 11, 11, 10, 10, 10, 0);
+        
+        Timestamp timestamp1 = Timestamp.valueOf(localDateTime1);
+        Timestamp timestamp2 = Timestamp.valueOf(localDateTime2);
         
         
         performDataTypeTest(modelXml, timestamp1, timestamp2);
@@ -885,21 +861,12 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
             "  </table>\n"+
             "</database>";
 
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.set(Calendar.YEAR, 90);
-        cal.set(Calendar.MONTH, 9);
-        cal.set(Calendar.DAY_OF_MONTH, 21);
-        cal.set(Calendar.HOUR_OF_DAY, 20);
-        cal.set(Calendar.MINUTE, 25);
-        cal.set(Calendar.SECOND, 39);
-        Timestamp timestamp1 = new Timestamp(cal.getTimeInMillis());
-        cal.set(Calendar.YEAR, 85);
-        cal.set(Calendar.MONTH, 5);
-        cal.set(Calendar.DAY_OF_MONTH, 17);
-        cal.set(Calendar.HOUR_OF_DAY, 16);
-        cal.set(Calendar.MINUTE, 17);
-        cal.set(Calendar.SECOND, 18);
-        Timestamp timestamp2 = new Timestamp(cal.getTimeInMillis());
+        LocalDateTime localDateTime1 = LocalDateTime.of(1990, 10, 21, 20, 25, 39, 0);
+        LocalDateTime localDateTime2 = LocalDateTime.of(1985, 6, 17, 16, 17, 18, 0);
+        
+        Timestamp timestamp1 = Timestamp.valueOf(localDateTime1);
+        Timestamp timestamp2 = Timestamp.valueOf(localDateTime2);
+
         performDataTypeTest(modelXml, timestamp1, null, timestamp2);
     }
 
