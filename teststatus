@@ -1,0 +1,5 @@
+defaultrun=green
+hsqldb=red
+h2=green
+db2=green
+postgresql=

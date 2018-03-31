@@ -3,7 +3,6 @@ package de.elnarion.ddlutils.platform;
 import de.elnarion.ddlutils.TestPlatformBase;
 import de.elnarion.ddlutils.platform.db2.Db2Platform;
 
-// TODO: Auto-generated Javadoc
 /**
  * Tests the DB2 platform.
  * 
