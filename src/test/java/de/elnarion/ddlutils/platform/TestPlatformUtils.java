@@ -3,6 +3,7 @@ package de.elnarion.ddlutils.platform;
 import de.elnarion.ddlutils.PlatformUtils;
 import de.elnarion.ddlutils.platform.db2.Db2Platform;
 import de.elnarion.ddlutils.platform.derby.DerbyPlatform;
+import de.elnarion.ddlutils.platform.h2.H2Platform;
 import de.elnarion.ddlutils.platform.hsqldb.HsqlDbPlatform;
 import de.elnarion.ddlutils.platform.mssql.MSSqlPlatform;
 import de.elnarion.ddlutils.platform.mysql.MySqlPlatform;
@@ -117,6 +118,24 @@ public class TestPlatformUtils extends TestCase
                      _platformUtils.determineDatabaseType(null, "jdbc:derby:sample"));
     }
 
+    /**
+     * Tests the determination of the H2 platform via its JDBC driver.
+     */
+    public void testH2Driver()
+    {
+        assertEquals(H2Platform.DATABASENAME,
+                     _platformUtils.determineDatabaseType("org.h2.Driver", null));
+    }
+
+    /**
+     * Tests the determination of the H2 platform via JDBC connection urls.
+     */
+    public void testH2Url()
+    {
+        assertEquals(H2Platform.DATABASENAME,
+                     _platformUtils.determineDatabaseType(null, "jdbc:h2:file:/opt/db/testdb"));
+    }
+    
     /**
      * Tests the determination of the HsqlDb platform via its JDBC driver.
      */

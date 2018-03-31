@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import de.elnarion.ddlutils.DdlUtilsException;
 import de.elnarion.ddlutils.TestAgainstLiveDatabaseBase;
@@ -38,6 +40,9 @@ import junit.framework.Test;
 public class TestConstraints extends TestAgainstLiveDatabaseBase
 {
     
+	/** The log for this platform. */
+	private final Log _log = LogFactory.getLog(getClass());
+	
     /**
 	 * Parameterized test case pattern.
 	 *
@@ -451,6 +456,8 @@ public class TestConstraints extends TestAgainstLiveDatabaseBase
         {
             return;
         }
+        
+        _log.info("testForeignKeyWithOnDeleteRestrict");
 
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+

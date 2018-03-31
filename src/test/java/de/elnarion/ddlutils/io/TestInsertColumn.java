@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.commons.beanutils.DynaBean;
 
 import de.elnarion.ddlutils.TestAgainstLiveDatabaseBase;
+import de.elnarion.ddlutils.platform.h2.H2Platform;
 import de.elnarion.ddlutils.platform.hsqldb.HsqlDbPlatform;
 import de.elnarion.ddlutils.platform.maxdb.MaxDbPlatform;
 import de.elnarion.ddlutils.platform.mysql.MySql50Platform;
@@ -295,6 +296,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
             // Some DBs ignore that the type is CHAR(8) and trim the value
@@ -842,6 +844,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
             // Some DBs ignore that the type is CHAR(8) and trim the value
@@ -1155,6 +1158,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
@@ -1509,6 +1513,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
             // Some DBs ignore that the type is CHAR(8) and trim the value
@@ -1869,6 +1874,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
@@ -2227,6 +2233,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
@@ -2808,6 +2815,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
             HsqlDbPlatform.DATABASENAME.equals(getPlatform().getName()) ||
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
             MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
