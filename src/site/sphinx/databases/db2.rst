@@ -37,6 +37,7 @@ Constraints
 Platform identifier
   | ``DB2`` for the v7 platform
   | ``DB2v8`` for the v8 platform
+  | ``DB2v11`` for the v11 platform
 
 Recognized JDBC driver
   | ``com.ibm.db2.jcc.DB2Driver``

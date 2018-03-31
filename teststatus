@@ -1,5 +1,4 @@
-defaultrun=green
-hsqldb=red
-h2=green
-db2=green
-postgresql=
+hsqldb-embedded;version2.4.0=failed
+h2-embedded;version1.4.197=passed
+db2;version11.1=passed
+postgresql;version10.3=passed
