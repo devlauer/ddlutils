@@ -30,7 +30,6 @@ import de.elnarion.ddlutils.platform.db2.Db2v8Platform;
 import de.elnarion.ddlutils.platform.derby.DerbyPlatform;
 import de.elnarion.ddlutils.platform.h2.H2Platform;
 import de.elnarion.ddlutils.platform.hsqldb.HsqlDbPlatform;
-import de.elnarion.ddlutils.platform.maxdb.MaxDbPlatform;
 import de.elnarion.ddlutils.platform.mssql.MSSqlPlatform;
 import de.elnarion.ddlutils.platform.mysql.MySql50Platform;
 import de.elnarion.ddlutils.platform.mysql.MySqlPlatform;
@@ -188,7 +187,6 @@ public class PlatformFactory
         addPlatform(_platforms, DerbyPlatform.DATABASENAME,       DerbyPlatform.class);
         addPlatform(_platforms, HsqlDbPlatform.DATABASENAME,      HsqlDbPlatform.class);
         addPlatform(_platforms, H2Platform.DATABASENAME,      	  H2Platform.class);
-        addPlatform(_platforms, MaxDbPlatform.DATABASENAME,       MaxDbPlatform.class);
         addPlatform(_platforms, MSSqlPlatform.DATABASENAME,       MSSqlPlatform.class);
         addPlatform(_platforms, MySqlPlatform.DATABASENAME,       MySqlPlatform.class);
         addPlatform(_platforms, MySql50Platform.DATABASENAME,     MySql50Platform.class);

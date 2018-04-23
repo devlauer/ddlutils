@@ -26,7 +26,6 @@ import org.apache.commons.beanutils.DynaBean;
 
 import de.elnarion.ddlutils.TestAgainstLiveDatabaseBase;
 import de.elnarion.ddlutils.platform.h2.H2Platform;
-import de.elnarion.ddlutils.platform.maxdb.MaxDbPlatform;
 import de.elnarion.ddlutils.platform.mysql.MySql50Platform;
 import de.elnarion.ddlutils.platform.mysql.MySqlPlatform;
 import junit.framework.Test;
@@ -294,8 +293,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
 
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) )
         {
             // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", avalue);
@@ -841,8 +839,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
 
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) )
         {
             // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", avalue);
@@ -1154,8 +1151,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
 
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) )
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", avalue);
@@ -1508,8 +1504,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(2),  beans.get(0), "avalue1");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()))
         {
             // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", avalue2);
@@ -1868,8 +1863,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(2), beans.get(0), "avalue1");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) )
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", avalue2);
@@ -2226,8 +2220,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(1), beans2.get(0), "pk");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) )
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", pk1);
@@ -2807,8 +2800,7 @@ public class TestInsertColumn extends TestAgainstLiveDatabaseBase
         assertEquals(new Integer(1), beans2.get(0), "avalue1");
         if (MySqlPlatform.DATABASENAME.equals(getPlatform().getName()) ||
             MySql50Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            H2Platform.DATABASENAME.equals(getPlatform().getName()) ||
-            MaxDbPlatform.DATABASENAME.equals(getPlatform().getName()))
+            H2Platform.DATABASENAME.equals(getPlatform().getName()) )
         {
                 // Some DBs ignore that the type is CHAR(8) and trim the value
             assertEquals("text", pk2);
