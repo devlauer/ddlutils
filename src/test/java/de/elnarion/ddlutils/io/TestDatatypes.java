@@ -30,8 +30,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
@@ -40,6 +38,7 @@ import org.apache.commons.beanutils.DynaBean;
 
 import de.elnarion.ddlutils.TestAgainstLiveDatabaseBase;
 import de.elnarion.ddlutils.model.Database;
+import de.elnarion.ddlutils.platform.oracle.Oracle12Platform;
 import junit.framework.Test;
 
 /**
@@ -374,6 +373,8 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testRealWithDefault()
     {
+    	if (Oracle12Platform.DATABASENAME.equals(getPlatform().getName())) 
+    			return;
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -391,6 +392,10 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testFloat()
     {
+    	// float maps to double so no float testing is required
+    	if (Oracle12Platform.DATABASENAME.equals(getPlatform().getName())) 
+			return;
+
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -408,6 +413,9 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testFloatWithDefault()
     {
+    	// float maps to double so no float testing is required
+    	if (Oracle12Platform.DATABASENAME.equals(getPlatform().getName())) 
+			return;
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -459,6 +467,9 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testDecimal()
     {
+		// numeric maps to decimal so no further testing required
+		if (!Oracle12Platform.DATABASENAME.equals(getPlatform().getName()))
+			return;
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -476,6 +487,9 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testDecimalWithDefault()
     {
+		// numeric maps to decimal so no further testing required
+		if (!Oracle12Platform.DATABASENAME.equals(getPlatform().getName()))
+			return;
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -493,6 +507,9 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testDecimalWithScale()
     {
+		// numeric maps to decimal so no further testing required
+		if (!Oracle12Platform.DATABASENAME.equals(getPlatform().getName()))
+			return;
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -510,6 +527,9 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testDecimalWithScaleAndDefault()
     {
+		// numeric maps to decimal so no further testing required
+		if (!Oracle12Platform.DATABASENAME.equals(getPlatform().getName()))
+			return;
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+
@@ -527,6 +547,7 @@ public class TestDatatypes extends TestAgainstLiveDatabaseBase
      */
     public void testNumeric()
     {
+    	
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n"+
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='roundtriptest'>\n"+

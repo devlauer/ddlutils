@@ -900,7 +900,8 @@ public abstract class PlatformImplBase extends JdbcSupport implements Platform {
 	public void alterModel(Connection connection, Database currentModel, Database desiredModel, boolean continueOnError)
 			throws DatabaseOperationException {
 		String sql = getAlterModelSql(currentModel, desiredModel);
-
+		_log.debug("sql");
+	
 		evaluateBatch(connection, sql, continueOnError);
 	}
 

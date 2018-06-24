@@ -10,7 +10,7 @@
 		</layout>
 	</appender>
 	<logger name="de.elnarion.ddlutils.platform">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	<root>
 		<level value="warn" />

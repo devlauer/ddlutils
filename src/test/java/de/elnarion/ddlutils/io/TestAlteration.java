@@ -28,6 +28,7 @@ import de.elnarion.ddlutils.TestAgainstLiveDatabaseBase;
 import de.elnarion.ddlutils.model.Database;
 import de.elnarion.ddlutils.platform.mysql.MySql50Platform;
 import de.elnarion.ddlutils.platform.mysql.MySqlPlatform;
+import de.elnarion.ddlutils.platform.oracle.Oracle12Platform;
 import junit.framework.Test;
 
 /**
@@ -1602,6 +1603,10 @@ public class TestAlteration extends TestAgainstLiveDatabaseBase
 	 */
     public void testIssue54() throws Exception
     {
+    	// because float is mapped to double any further altersql will try to create a new table with float
+    	if (Oracle12Platform.DATABASENAME.equals(getPlatform().getName())) 
+			return;
+
         final String modelXml = 
             "<?xml version='1.0' encoding='ISO-8859-1'?>\n" +
             "<database xmlns='" + DatabaseIO.DDLUTILS_NAMESPACE + "' name='test'>\n" +

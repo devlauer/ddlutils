@@ -34,6 +34,7 @@ import de.elnarion.ddlutils.platform.mssql.MSSqlPlatform;
 import de.elnarion.ddlutils.platform.mysql.MySql50Platform;
 import de.elnarion.ddlutils.platform.mysql.MySqlPlatform;
 import de.elnarion.ddlutils.platform.oracle.Oracle10Platform;
+import de.elnarion.ddlutils.platform.oracle.Oracle12Platform;
 import de.elnarion.ddlutils.platform.oracle.Oracle8Platform;
 import de.elnarion.ddlutils.platform.oracle.Oracle9Platform;
 import de.elnarion.ddlutils.platform.postgresql.PostgreSqlPlatform;
@@ -193,6 +194,7 @@ public class PlatformFactory
         addPlatform(_platforms, Oracle8Platform.DATABASENAME,     Oracle8Platform.class);
         addPlatform(_platforms, Oracle9Platform.DATABASENAME,     Oracle9Platform.class);
         addPlatform(_platforms, Oracle10Platform.DATABASENAME,    Oracle10Platform.class);
+        addPlatform(_platforms, Oracle12Platform.DATABASENAME,    Oracle12Platform.class);
         addPlatform(_platforms, PostgreSqlPlatform.DATABASENAME,  PostgreSqlPlatform.class);
     }
 
