@@ -27,7 +27,7 @@
 
 	<issueManagement>
 		<system>jira</system>
-		<url>https://github.com/devlauer/ddlutils/issues</url>
+		<url>sqttps://github.com/devlauer/ddlutils/issues</url>
 	</issueManagement>
 
 	<developers>
@@ -331,7 +331,7 @@
 				<dependency>
 					<groupId>org.hsqldb</groupId>
 					<artifactId>hsqldb</artifactId>
-					<version>2.7.0</version>
+					<version>2.7.1</version>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
